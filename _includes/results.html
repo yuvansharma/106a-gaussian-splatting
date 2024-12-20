@@ -1,0 +1,143 @@
+<!-- Horizontal line above the section -->
+<hr class="primary-line">
+
+<section class="page-section" id="results">
+  <div class="container">
+    <div class="row text-center mb-4">
+      <div class="col-lg-12">
+        <h2 class="section-heading text-uppercase">{{ site.data.sitetext[site.locale].results.title }}</h2>
+        <!-- Reduce margin-bottom on the subtitle (h3) -->
+        <h3 class="section-subheading text-muted" style="margin-bottom: 0.5em;">{{ site.data.sitetext[site.locale].results.subtitle }}</h3>
+      </div>
+    </div>
+
+    <!-- Text Before Grid (Adjusting top margin here) -->
+    <div class="row" style="margin-bottom: 0;"> <!-- Remove unnecessary bottom margin -->
+      <div class="col-lg-12">
+        <p class="text-justify text-muted">{{ site.data.sitetext[site.locale].results.body1 }}</p>
+      </div>
+    </div>
+    
+    <!-- 2x2 Grid of Viewers -->
+    <div class="row">
+      <!-- Viewer 1 -->
+      <div class="col-md-6 col-lg-6 position-relative">
+        <iframe 
+          id="viewer1"
+          src="/assets/point_cloud_dev/potree/examples/screwdriver_full_scene.html" 
+          style="width: 100%; height: 500px; border: 1px solid #ccc;">
+        </iframe>
+        <!-- Fullscreen Button -->
+        <button 
+          onclick="toggleFullScreen('viewer1')" 
+          class="fullscreen-btn position-absolute" 
+          style="top: 10px; right: 10px;">
+          <i class="fas fa-arrows-alt"></i>
+        </button>
+      </div>
+      
+      <!-- Viewer 2 -->
+      <div class="col-md-6 col-lg-6 position-relative">
+        <iframe 
+          id="viewer2"
+          src="/assets/point_cloud_dev/potree/examples/screwdriver_only_scene.html" 
+          style="width: 100%; height: 500px; border: 1px solid #ccc;">
+        </iframe>
+        <!-- Fullscreen Button -->
+        <button 
+          onclick="toggleFullScreen('viewer2')" 
+          class="fullscreen-btn position-absolute" 
+          style="top: 10px; right: 10px;">
+          <i class="fas fa-arrows-alt"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Viewer 3 -->
+      <div class="col-md-6 col-lg-6 position-relative">
+        <iframe 
+          id="viewer3"
+          src="/assets/point_cloud_dev/potree/examples/yellow_whole_scene.html" 
+          style="width: 100%; height: 500px; border: 1px solid #ccc;">
+        </iframe>
+        <!-- Fullscreen Button -->
+        <button 
+          onclick="toggleFullScreen('viewer3')" 
+          class="fullscreen-btn position-absolute" 
+          style="top: 10px; right: 10px;">
+          <i class="fas fa-arrows-alt"></i>
+        </button>
+      </div>
+      
+      <!-- Viewer 4 -->
+      <div class="col-md-6 col-lg-6 position-relative">
+        <iframe 
+          id="viewer4"
+          src="/assets/point_cloud_dev/potree/examples/yellow_only.html" 
+          style="width: 100%; height: 500px; border: 1px solid #ccc;">
+        </iframe>
+        <!-- Fullscreen Button -->
+        <button 
+          onclick="toggleFullScreen('viewer4')" 
+          class="fullscreen-btn position-absolute" 
+          style="top: 10px; right: 10px;">
+          <i class="fas fa-arrows-alt"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Text After Grid -->
+    <div class="row mt-4">
+      <div class="col-lg-12">
+        <p class="text-justify text-muted">{{ site.data.sitetext[site.locale].results.body2 }}</p>
+      </div>
+    </div>
+  </div>
+
+   <!-- Photo -->
+   <div class="col-md-12 text-center">
+    <figure style="display: inline-block; width: 20%;">
+      <img 
+        src="{{ site.data.sitetext[site.locale].results.photo1 | default: 'assets/img/octomap_viz.png' }}" 
+        alt="Photo Description" 
+        class="img-fluid rounded" 
+        style="border: 1px solid black; margin-bottom: 0.5em; width: 100%;">
+      <figcaption class="text-muted" style="font-style: italic; text-align: center;">{{ site.data.sitetext[site.locale].results.caption1 | default: "" }}</figcaption>
+    </figure>
+  </div>
+  
+
+  <!-- Video -->
+  <div style="text-align: center; width: 100%;">
+    <figure style="display: inline-block; margin: 0; width: 60%;">
+      <video 
+        controls 
+        class="img-fluid" 
+        style="display: block; margin: 0 auto; border: 1px solid black; margin-bottom: 0.5em; width: 100%;">
+        <source src="{{ site.data.sitetext[site.locale].results.video1 | default: '' }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <figcaption class="text-muted" style="font-style: italic;">{{ site.data.sitetext[site.locale].results.video_caption | default: "" }}</figcaption>
+    </figure>
+  </div>
+  
+  
+
+</section>
+
+<!-- Horizontal line below the section -->
+<hr class="primary-line">
+
+<script>
+  function toggleFullScreen(iframeId) {
+    const iframe = document.getElementById(iframeId);
+    if (iframe.requestFullscreen) {
+      iframe.requestFullscreen();
+    } else if (iframe.webkitRequestFullscreen) { // Safari
+      iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) { // IE/Edge
+      iframe.msRequestFullscreen();
+    }
+  }
+</script>

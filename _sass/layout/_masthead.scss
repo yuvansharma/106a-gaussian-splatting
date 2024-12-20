@@ -41,6 +41,7 @@ header.masthead {
       .intro-heading {
         font-size: 75px;
         font-weight: 700;
+        font-style: italic;
         line-height: 75px;
         margin-bottom: 50px;
         @include heading-font;

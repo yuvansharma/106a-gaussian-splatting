@@ -1,0 +1,77 @@
+<!-- Horizontal line above the section -->
+<hr class="primary-line">
+
+<!-- Implementation Section -->
+<section class="page-section" id="{{ site.data.sitetext[site.locale].implementation.section | default: "implementation" }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase">{{ site.data.sitetext[site.locale].implementation.title | default: "Implementation" }}</h2>
+        <!-- Reduced margin-bottom on the subtitle -->
+        <h3 class="section-subheading text-muted" style="margin-bottom: 0.5em;">{{ site.data.sitetext[site.locale].implementation.subtitle | default: "" }}</h3>
+      </div>
+    </div>
+
+    <!-- Body1 with Bullets -->
+    <div class="row">
+      <div class="col-lg-12 mx-auto text-justify">
+        <div class="large text-muted">
+          <ul>
+            {{ site.data.sitetext[site.locale].implementation.body1 | markdownify }}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Photo1 -->
+    <div class="row" style="margin-top: 1em;">
+      <div class="col-md-6 mx-auto text-center">
+        <figure>
+          <img src="{{ site.data.sitetext[site.locale].implementation.photo1 | default: 'assets/img/implementation_photo1.jpg' }}" 
+               alt="Photo Description" 
+               class="img-fluid rounded" 
+               style="border: 2px solid black; margin-bottom: 0.5em;">
+          <figcaption class="text-muted" style="font-style: italic;">
+            {{ site.data.sitetext[site.locale].implementation.photo1_caption | default: "" }}
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+     <!-- Body2 with Bullets -->
+     <div class="row">
+      <div class="col-lg-12 mx-auto text-justify">
+        <div class="large text-muted">
+          <ul>
+            {{ site.data.sitetext[site.locale].implementation.body2 | markdownify }}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Photo2 -->
+    <div class="row" style="margin-top: 1em;">
+      <div class="col-md-6 mx-auto text-center">
+        <figure>
+          <img src="{{ site.data.sitetext[site.locale].implementation.photo2 | default: 'assets/img/implementation_photo2.jpg' }}" 
+               alt="Photo Description" 
+               class="img-fluid rounded" 
+               style="border: 2px solid black; margin-bottom: 0.5em;">
+               <figcaption class="text-muted" style="font-style: italic;">
+            {{ site.data.sitetext[site.locale].implementation.photo2_caption | default: "" }}
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+    
+
+    <!-- Body3 -->
+    <div class="row" style="margin-top: 1em;">
+      <div class="col-lg-12 mx-auto text-justify">
+        <div class="large text-muted">
+          {{ site.data.sitetext[site.locale].implementation.body3 | markdownify }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Horizontal line below the section -->
+<hr class="primary-line">

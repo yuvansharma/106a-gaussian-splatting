@@ -17,13 +17,14 @@
 {% endif %}
 
 // Custom colors
-$primary: {{ site.data.style.highlight | default: "#fed136" }} !default;
+$primary: {{ site.data.style.highlight | default: "#f45550" }} !default;
 $white: {{ site.data.style.white | default: "#fff" }} !default;
 $black: {{ site.data.style.black | default: "#000" }} !default;
 
 // Custom Images
 $header-image: "{{ site.data.style.header-image }}";
 $contact-image: "{{ site.data.style.contact-image }}";
+
 
 // Global CSS
 @import "base/page.scss";
@@ -41,3 +42,18 @@ $contact-image: "{{ site.data.style.contact-image }}";
 @import "layout/team.scss";
 @import "layout/contact.scss";
 @import "layout/footer.scss";
+
+
+#introduction .section-subheading {
+  margin-bottom: 10px; /* Reduce space between subheading and body */
+}
+
+#introduction .large.text-muted {
+  max-width: 10000px; /* Restrict text width */
+  margin: 0 auto; /* Center text horizontally */
+}
+
+#introduction img {
+  margin-top: 20px; /* Add some space above the image if needed */
+}
+

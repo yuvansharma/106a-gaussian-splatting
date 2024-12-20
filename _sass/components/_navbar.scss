@@ -1,9 +1,10 @@
-// Styling for the navbar
 #mainNav {
-  background-color: $gray-900;
+  background-color: #212529; // Always black background
+  padding-top: 10px; // Adjust top padding for proper spacing
+  padding-bottom: 10px; // Adjust bottom padding for proper spacing
+
   .navbar-toggler {
     font-size: 12px;
-    right: 0;
     padding: 13px;
     text-transform: uppercase;
     color: white;
@@ -11,9 +12,11 @@
     background-color: $primary;
     @include heading-font;
   }
+
   .navbar-brand {
     color: $primary;
     @include script-font;
+    
     &.active,
     &:active,
     &:focus,
@@ -21,15 +24,30 @@
       color: darken($primary, 10%);
     }
   }
+
+  .navbar-collapse {
+    display: flex; // Use flexbox to control the navbar collapse
+    justify-content: center; // Center navbar items
+    align-items: center; // Vertically align items in the center
+    width: 100%; // Ensure collapse container takes full width
+  }
+
   .navbar-nav {
+    display: flex;
+    justify-content: center; // Center items within the navbar
+    align-items: center; // Ensure vertical alignment of the items
+    margin: 0; // Remove any extra margins
+
     .nav-item {
+      margin: 0 15px; // Adjust space between items
       .nav-link {
         font-size: 90%;
         font-weight: 400;
-        padding: 0.75em 0;
+        padding: 0.75em 1.5em; // Adjust padding for a clean look
         letter-spacing: 1px;
-        color: white;
+        color: rgb(255, 255, 255);
         @include heading-font;
+        
         &.active,
         &:hover {
           color: $primary;
@@ -37,36 +55,14 @@
       }
     }
   }
-}
-@media (min-width: 992px) {
-  #mainNav {
-    padding-top: 25px;
-    padding-bottom: 25px;
-    -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
-    -moz-transition: padding-top 0.3s, padding-bottom 0.3s;
-    transition: padding-top 0.3s, padding-bottom 0.3s;
-    border: none;
-    background-color: transparent;
-    .navbar-brand {
-      font-size: 1.75em;
-      -webkit-transition: all 0.3s;
-      -moz-transition: all 0.3s;
-      transition: all 0.3s;
-    }
+
+  // Media query adjustments for larger screens
+  @media (min-width: 992px) {
     .navbar-nav {
       .nav-item {
         .nav-link {
-          padding: 1.1em 1em !important;
+          padding: 1.1em 2em; // Increase padding on larger screens
         }
-      }
-    }
-    &.navbar-shrink {
-      padding-top: 0;
-      padding-bottom: 0;
-      background-color: $gray-900;
-      .navbar-brand {
-        font-size: 1.25em;
-        padding: 12px 0;
       }
     }
   }

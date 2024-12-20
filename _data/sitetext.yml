@@ -11,69 +11,87 @@
 # -----------------
 en: &DEFAULT_EN
   header:
-    title: Welcome to our Studio!
-    text: It's Nice To Meet You
-    button: Tell Me More
-    buttonlink: "#services"
+    title: |
+      <div class="shaded-box">
+        EECS 106A Final Project Group #21
+      </div>
+    text: |
+      <div class="shaded-box">
+        Gaussian Splatting for Robotic Manipulation
+      </div>
+    button: Tell Me More!
+    buttonlink: "#introduction"
 
-  services:
-    title: "Services"
-    text: "Lorem ipsum"
-    section: services
-    list:
-      - title: "E-Commerce"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."
-        icon: fas fa-shopping-cart #find more at https://fontawesome.com/icons
-      - title: "Responsive Design"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."
-        icon: fas fa-laptop
-      - title: "[Markdown](https://en.wikipedia.org/wiki/Markdown)"
-        desc: "Your description here, full **Markdown** support"
-        icon: fab fa-markdown
+  introduction:
+    section: "introduction"
+    title: "Introduction"
+    text: "What is Gaussian Splatting and how can it be useful for robotics?"
+    photo: "assets/img/intro_image.jpg" # Optional: set a path for the image
+    caption: "The tabletop setup for our project, showing one of our captured scenes."
+    body: |
 
-  portfolio:
-    title: "Portfolio"
-    text: "Lorem ipsum dolor sit amet consectetur."
-    section: portfolio
-    closebutton: "Close Project"
+      Gaussian splatting is a technique used to reconstruct a 3D scene by optimizing numerous tiny 3D Gaussians, creating a dense point cloud that represents the spatial distribution of objects. The process begins with capturing different viewpoints of the scene, which gives a set of image-camera pose pairs (anywhere from 50 to >1000) which serve as the input. The output is a Gaussian splat or point cloud that captures the scene's geometry and structure.
+      
+      <div style="margin-bottom: 0.75em;"></div>
+      The primary motivation for using Gaussian splatting in robotics is its ability to provide real-time rendering of complex 3D environments. Compared to ray-based methods like NeRF (Neural Radiance Fields), Gaussian splatting offers more efficient processing, especially when dynamic scene updates are required (which is not trivial but certainly possible).
 
-  timeline:
-    title: "Timeline"
-    text: "Lorem ipsum timeline"
-    section: timeline
-    # left is the default
-    #start_align: "left"
-    events:
-      - title: "Our Humble Beginnings"
-        year: "2009-2011"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
-        image: assets/img/timeline/1.jpg
-        alt:
-      - title: "An Agency is Born"
-        year: "March 2011"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
-        image: assets/img/timeline/2.jpg
-        alt:
-      - title: "Jekyll Theme is created"
-        year: "2019"
-        desc: "Ravi Riley converted Agency, a Bootstrap-based theme, into a Jekyll theme. The Jekyll theme can be installed as a Ruby gem, or remotely. For more information, visit the documentation."
-        image: assets/img/timeline/3.jpg
-        alt: image alt text
-      - title: "Title"
-        year: "2009-2011"
-        desc: "Your description here, **Markdown** is fully supported."
-        image: assets/img/timeline/4.jpg
-        alt:
-        # you can enforce the alignment
-        align: right
-    end: "Be Part <br> of Our <br> Story!"
+      <div style="margin-bottom: 0.75em;"></div>
 
-  about:
-    title: "About Us"
-    text: "our story"
-    body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde. **Markdown** supported."
-    section: about
+      In our use case, we aim to leverage static Gaussian splatting to recreate a tabletop scene for robotic manipulation. The high-level goal is to enable a robot to navigate a crowded environment, identify and interact with a target object, and perform tasks such as picking it up and placing it at a desired location—all with the help of 3D scene reconstruction from Gaussian splatting. To achieve this, we needed to address the following challenges with our pipeline: 
+      - **Capturing the Scene**: Collecting enough diverse images and camera poses of the tabletop scene, and also making sure the scene is reliably recreated each time for testing.
+      - **Training the Gaussian splatting model**: Optimizing the Gaussians to accurately represent the scene's geometry and structure.
+      - **Integrating Point Cloud into MoveIt**: Using the cleaned, optimized point cloud in MoveIt collision planning as an Octomap.
+      - **Collision avoidance and Evaluation**: Finetuning hyperparameters such as the Octomap resolution to ensure that collision avoidance works as expected for different target positions.
 
+
+  results:
+    title: "Results"
+    subtitle: Point cloud visualizations and video demo!
+    body1: |
+      After some extensive experimentation—particularly with the Gaussian splatting part of the pipeline—we were able to reliably create high quality splats for our scenes. We provide interactive visualizations for two of our final scenes and target objects below.
+    body2: |
+      We were able to perform pick place tasks with both objects with precision, both in terms of the object localization (the reconstruction part) and avoiding obstacles (the motion planning part). Since our project has no live vision component and relies entirely on the scene reconstruction, it was critical that the point cloud obtained from Gaussian splatting was high quality, correctly scaled and oriented and the object localization component was accurate enough. Our integration of the point cloud with Octomap was also smooth as collision avoidance worked as expected. We provide a visualization of the Octomap and a video demo for one of our scenes below.
+      <br>
+      <br>
+      <br>
+      HELLO ADD THE VIDEO
+    photo1: "assets/img/octomap_viz.png"
+    caption1: "Octomap visualization in MoveIt! during collision planning."
+    video1: "assets/videos/demo.mp4"
+    video_caption: "Video demo of our robot performing a pick place task."
+  
+  design:
+    title: "Design"
+    body: |
+      Our starting goal for the project was creating a high quality point cloud to use as a scene representation for robotic control. We were interested in how we can further improve on the Structure from Motion (SfM) techniques discussed in class. After some research, we settled on Gaussian splatting as our scene reconstruction technique. The main trade-off here was that we had to settle for a static representation (no dynamic scene updates) with Gaussian splatting, since updating Gaussian splats was not easy to implement in the limited time we had. However, one of the big advantages of this choice was that point clouds are a very natural extension from splatting, making the integration from the scene reconstruction module to collision avoidance and motion planning easier and the pipeline as a whole more robust. In addition, splats yield impressively high quality point clouds and are relatively quick to train (about 15-20 minutes per scene), allowing for efficiency and quick iterative design. Lastly, when creating a splat for a scene, reproducibility was important, which we ensured by measuring relative distances between objects and creating a standard boundary for the scene.
+    section: design
+  
+  implementation:
+    section: "implementation"
+    title: "Implementation"
+    subtitle: "How we brought our project to life."
+    body1: |
+      <div style="margin-bottom: 0.75em;"></div>
+
+      Our final pipeline consists of the following steps, with a description of things we tried while in the experimental phase: 
+      - **Step 1: Collect images**: We record a revolving video of the scene. After experimenting with different cameras and mounts (including a camera mounted on Sawyer's wrist), we found the best quality reconstructions came from handheld videos with our phones. We sampled the ~40 second videos at 10 fps, yielding 300-500 initial images.
+      - **Step 2: COLMAP**: We use COLMAP, a Structure from Motion (SfM) program that takes in input images and outputs a sparse point cloud (~10,000 points) and estimates for camera poses corresponding to the images. While not necessary, we found that this step is a good starting point for the Gaussian splatting training and helps it converge faster. 
+    
+    body2: |
+      - **Step 3: Gaussian splatting training**: We train the Gaussian splat based on the [original codebase](https://github.com/graphdeco-inria/gaussian-splatting/). For our scenes, we found training converges after 15,000 steps.
+      - **Step 4: Localizing target object:** After cleaning and scaling the output point cloud, we use color filters and clustering to find the centroid (x,y,z) of the target object.
+      - **Step 5: Octomap and MoveIt**: We add the point cloud to MoveIt!'s PlanningScene as an Octomap. We then use Command group.... <br>
+      <br>
+      <br>
+      HELLO ADD THE TEXT
+      - **Step 6: Collision Planning**: The motion planning part is done by MoveIt! Command Group, which performs trajectory planning with collision checks and solves inverse kinematics. We can directly execute the trajectories produced from this step, leading to actuation on the real robot and the completion of our task.
+    photo1_caption: "Sparse point cloud and camera poses from COLMAP."
+    photo1: "assets/img/colmap.png"
+    photo2: "assets/img/pipeline.png"
+    photo2_caption: "Diagram of our pipeline."
+    body3: |
+      In terms of the code for this project, we used the original Gaussian splatting codebase described above and COLMAP, with minimal changes such as hyperparameters. We wrote the code ourselves for point cloud noise removal, clustering and color filtering for object localization. We also implemented the Octomap integration code with MoveIt! ourselves, which we provide in our Github repository.
+  
   clients:
     section: clients
     max-height: 100px
@@ -165,311 +183,3 @@ en-GB:
   <<: *DEFAULT_EN
 en-AU:
   <<: *DEFAULT_EN
-
-# Spanish
-# -------
-es: &DEFAULT_ES
-  header:
-    title: ¡Bienvenido a nuestro Estudio!
-    text: Es un placer conocerle
-    button: Ver más
-    buttonlink: "#servicios"
-
-  services:
-    title: "Servicios"
-    text: "Lorem ipsum"
-    section: servicios
-    list:
-      - title: "Comercio Electrónico"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."
-        icon: fas fa-shopping-cart #find more at https://fontawesome.com/icons
-      - title: "Diseño Responsivo"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."
-        icon: fas fa-laptop
-      - title: "[Markdown](https://en.wikipedia.org/wiki/Markdown)"
-        desc: "Su descripción aquí, soporte completo de **Markdown**"
-        icon: fab fa-markdown
-
-  portfolio:
-    title: "Portafolio"
-    text: "Lorem ipsum dolor sit amet consectetur."
-    section: portafolio
-    closebutton: "Cerrar Proyecto"
-
-  timeline:
-    title: "Cronología"
-    text: "Lorem ipsum timeline"
-    section: cronologia
-    # left is the default
-    #start_align: "left"
-    events:
-      - title: "Nuestro Humilde Comienzo"
-        year: "2009-2011"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
-        image: assets/img/timeline/1.jpg
-        alt:
-      - title: "Una Agencia nace"
-        year: "March 2011"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
-        image: assets/img/timeline/2.jpg
-        alt:
-      - title: "La plantilla Jekyll es creada"
-        year: "2019"
-        desc: "Ravi Riley convirtió Agency, una plantilla basada en Bootstrap, en una plantilla de Jekyll. La plantilla Jekyll puede ser instalada commo una gema de Ruby (Ruby gem) o remotamente. Para más información, visite la documentación."
-        image: assets/img/timeline/3.jpg
-        alt: image alt text
-      - title: "Título"
-        year: "2009-2011"
-        desc: "Su descripción aquí, **Markdown** es soportado completamente."
-        image: assets/img/timeline/4.jpg
-        alt:
-        # you can enforce the alignment
-        align: right
-    end: "¡Se parte <br> de Nuestra <br> Historia!"
-
-  about:
-    title: "Sobre nosotros"
-    text: "nuestra historia"
-    body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde. **Markdown** supported."
-    section: nosotros
-
-  clients:
-    section: clientes
-    max-height: 100px
-    horizontal-scrolling: "" #"yes/no"
-    list:
-      - title: "envato"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/envato.jpg
-      - title: "designmodo"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/designmodo.jpg
-      - title: "themeforest"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/themeforest.jpg
-      - title: "Creative Market"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/creative-market.jpg
-
-  team:
-    title: "NUESTRO INCREÍBLE EQUIPO"
-    text: "Lorem ipsum dolor sit amet consectetur."
-    subtext: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde. **Markdown** supported.
-    section: equipo
-    people:
-      - name: "Kay Garland"
-        role: "Lead Designer"
-        image: assets/img/team/500x500.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
-      - name: "Larry Parker"
-        role: "Lead Marketer"
-        image: assets/img/team/2.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
-      - name: "Diana Perterson"
-        role: "Lead Developer"
-        image: assets/img/team/500x500.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
-
-  contact:
-    title: "Contáctenos"
-    text: "Lorem ipsum or call 123456789"
-    section: contacto
-    name: "Nombre*"
-    name-validation: "Por favor ingrese su nombre."
-    email: "Correo Electrónico*"
-    email-validation: "Por favor ingrese su correo electrónico."
-    phone: "Número Telefónico*"
-    phone-validation: "Por favor ingrese su número telefónico."
-    message: "Mensaje*"
-    message-validation: "Por favor escriba un mensaje."
-    subject: "Envío del formulario de contacto"
-    submit: "Enviar Mensaje"
-
-  footer:
-    legal: "Política de Privacidad"
-    social:
-      - url: https://twitter.com
-        icon: "fab fa-twitter"
-      - url: https://facebook.com
-        icon: "fab fa-facebook-f"
-      - url: https://linkedin.com
-        icon: "fab fa-linkedin-in"
-      - url: https://github.com/raviriley/agency-jekyll-theme
-        icon: "fab fa-github"
-      - url: https://instagram.com
-        icon: "fab fa-instagram"
-es-ES:
-  <<: *DEFAULT_ES
-es-CO:
-  <<: *DEFAULT_ES
-
-# Deutsch
-# -----------------
-de: &DEFAULT_DE
-  header:
-    title: Willkommen auf unserer Webseite!
-    text: Schön das Sie hier sind!
-    button: Mehr erfahren
-    buttonlink: "#Angebote"
-
-  services:
-    title: "Leistungen"
-    text: "Was wir anbieten."
-    section: Leistungen
-    list:
-      - title: "E-Commerce"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."
-        icon: fas fa-shopping-cart #find more at https://fontawesome.com/icons
-      - title: "Responsive Design"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."
-        icon: fas fa-laptop
-      - title: "[Markdown](https://de.wikipedia.org/wiki/Markdown)"
-        desc: "Hier können Sie etwas mit **Markdown** einfügen."
-        icon: fab fa-markdown
-
-  portfolio:
-    title: "Portfolio"
-    text: "Lorem ipsum dolor sit amet consectetur."
-    section: Portfolio
-    closebutton: "Schließen"
-
-  timeline:
-    title: "Geschichte"
-    text: "Lorem ipsum timeline"
-    section: Geschichte
-    # left is the default
-    #start_align: "left"
-    events:
-      - title: "Unsere Anfänge"
-        year: "2009-2011"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
-        image: assets/img/timeline/1.jpg
-        alt:
-      - title: "Gründung der Firma"
-        year: "März 2011"
-        desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
-        image: assets/img/timeline/2.jpg
-        alt:
-      - title: "Das Jekyll-Thema wurde erstellt"
-        year: "2019"
-        desc: "Ravi Riley wandelte Agency, ein auf Bootstrap basierendes Thema, in ein Jekyll-Thema um. Man kann das Jekyll-Thema als Ruby-Gem oder remotely installieren. Für mehr Informationen, schauen Sie sich die Dokumentation an."
-        image: assets/img/timeline/3.jpg
-        alt: Bildbeschreibung
-      - title: "Titel"
-        year: "2009-2011"
-        desc: "Hier können Sie etwas mit **Markdown** einfügen."
-        image: assets/img/timeline/4.jpg
-        alt:
-        # you can enforce the alignment
-        align: right
-    end: "Seien Sie <br> Teil unserer <br> Geschichte!"
-
-  about:
-    title: "Über uns"
-    text: "Unsere Geschichte."
-    body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde. **Markdown** supported."
-    section: Ueber
-
-  clients:
-    section: Kunden
-    max-height: 100px
-    horizontal-scrolling: "" #"yes/no"
-    list:
-      - title: "envato"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/envato.jpg
-      - title: "designmodo"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/designmodo.jpg
-      - title: "themeforest"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/themeforest.jpg
-      - title: "Creative Market"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/creative-market.jpg
-
-  team:
-    title: "Unser großartiges Team"
-    text: "Lorem ipsum dolor sit amet consectetur."
-    subtext: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde. **Markdown** supported.
-    section: Team
-    people:
-      - name: "Kay Garland"
-        role: "Chef-Designer"
-        image: assets/img/team/500x500.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
-      - name: "Larry Parker"
-        role: "Chef der Werbeabteilung"
-        image: assets/img/team/2.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
-      - name: "Diana Perterson"
-        role: "Chef-Programmiererin"
-        image: assets/img/team/500x500.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
-
-  contact:
-    title: "Kontakt"
-    text: "Kontaktieren Sie uns."
-    section: Kontakt
-    name: "Name*"
-    name-validation: "Geben Sie einen Namen ein."
-    email: "E-Mail*"
-    email-validation: "Geben Sie Ihre E-Mail-Addresse ein."
-    phone: "Telefonnummer*"
-    phone-validation: "Geben Sie Ihre Telefonnummer ein."
-    message: "Nachricht*"
-    message-validation: "Schreiben Sie etwas..."
-    subject: "Kontakt-Formular Bestätigung"
-    submit: "Nachricht absenden"
-
-  footer:
-    legal: "Datenschutzerklärung"
-    social:
-      - url: https://twitter.com
-        icon: "fab fa-twitter"
-      - url: https://facebook.com
-        icon: "fab fa-facebook-f"
-      - url: https://linkedin.com
-        icon: "fab fa-linkedin-in"
-      - url: https://github.com/raviriley/agency-jekyll-theme
-        icon: "fab fa-github"
-      - url: https://instagram.com
-        icon: "fab fa-instagram"
-de-DE:
-  <<: *DEFAULT_DE

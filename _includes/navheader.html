@@ -13,7 +13,7 @@
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav text-uppercase ml-auto">
+        <ul class="navbar-nav text-uppercase justify-content-center">
         {% if site.locale and site.locale != "" and site.locale != nil %}
         {% for link in site.data.navigation[site.locale].nav %}
           <li class="nav-item">
@@ -54,7 +54,7 @@
         <div class="intro-lead-in">{{ site.data.sitetext[site.locale].header.title | markdownify }}</div>
 	  {%- endif -%}
 	  {%- if site.data.sitetext[site.locale].header.text -%}
-        <div class="intro-heading text-uppercase">{{ site.data.sitetext[site.locale].header.text | markdownify }}</div>
+        <div class="intro-heading">{{ site.data.sitetext[site.locale].header.text | markdownify }}</div>
 	  {%- endif -%}
 	  {%- if site.data.sitetext[site.locale].header.button -%}
         <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ site.data.sitetext[site.locale].header.buttonlink }}">{{ site.data.sitetext[site.locale].header.button }}</a>

@@ -13,10 +13,11 @@
 
 theme: jekyll-agency
 
-url    : "" # the base hostname & protocol for your site, e.g. http://example.com
-baseurl: "" # the subpath of your site, e.g. /blog
 
-title      : Your Awesome Website
+url    : "https://yuvansharma.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/106a-gaussian-splatting" # the subpath of your site, e.g. /blog
+
+title      : #EECS 106A Final Project
 email      : your-email@example.com #this is also the email contact forms will go to
 description: "Site description"
 author     : Your Name
@@ -33,6 +34,10 @@ collections:
   portfolio:
 
 markdown: kramdown
+
+exclude:
+  - assets/point_cloud_dev/
+
 
 # Uncomment following line to use Formspree form ID based URL instead of email based URL
 # Details: https://help.formspree.io/hc/en-us/articles/360017735154-How-to-prevent-spam

@@ -4,8 +4,19 @@ body {
   @include body-font;
 }
 
+ul, ol {
+  font-size: 1.2rem; // Adjust the size as needed
+  line-height: 1.75; // Optionally adjust line height for better readability
+}
+
+li {
+  font-size: 1.2rem; // Adjust size for each list item
+}
+
+
 p {
   line-height: 1.75;
+  font-size: 1.2em;
 }
 
 a {
@@ -68,4 +79,10 @@ img::selection {
 
 img::-moz-selection {
   background: transparent;
+}
+
+.primary-line {
+  border: 0;
+  border-top: 2px solid $primary;
+  margin: 0;
 }
