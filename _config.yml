@@ -37,7 +37,7 @@ collections:
 markdown: kramdown
 
 exclude:
-  - assets/point_cloud_dev/potree/node_modules/**/README.md
+  - assets/point_cloud_dev/potree/node_modules/**/*.md
 
 
 # Uncomment following line to use Formspree form ID based URL instead of email based URL
