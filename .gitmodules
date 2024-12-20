@@ -1,0 +1,3 @@
+[submodule "assets/point_cloud_dev/potree"]
+	path = assets/point_cloud_dev/potree
+	url = https://github.com/yuvansharma/potree-viz.git
