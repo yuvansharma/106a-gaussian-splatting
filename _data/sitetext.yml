@@ -80,11 +80,8 @@ en: &DEFAULT_EN
     body2: |
       - **Step 3: Gaussian splatting training**: We train the Gaussian splat based on the [original codebase](https://github.com/graphdeco-inria/gaussian-splatting/). For our scenes, we found training converges after 15,000 steps.
       - **Step 4: Localizing target object:** After cleaning and scaling the output point cloud, we use color filters and clustering to find the centroid (x,y,z) of the target object.
-      - **Step 5: Octomap and MoveIt**: We add the point cloud to MoveIt!'s PlanningScene as an Octomap. We then use Command group.... <br>
-      <br>
-      <br>
-      HELLO ADD THE TEXT
-      - **Step 6: Collision Planning**: The motion planning part is done by MoveIt! Command Group, which performs trajectory planning with collision checks and solves inverse kinematics. We can directly execute the trajectories produced from this step, leading to actuation on the real robot and the completion of our task.
+      - **Step 5: Octomap and MoveIt**: We add the point cloud data to MoveIt!'s PlanningScene as an Octomap, a 3D occupancy grid that represents the environment and objects within it. Aligning the Octomap to the robot model's base frame allows the system to understand the spatial layout, including obstacles, and provides a foundation for dynamic motion planning. Using MoveIt!'s Command Group functionality, we perform trajectory planning with integrated collision checking, ensuring that the robot’s movements are both efficient and safe.
+      - **Step 6: Collision Planning**: MoveIt! utilizes the Open Motion Planning Library (OMPL) to handle motion planning, offering access to a suite of powerful algorithms such as RRT (Rapidly-exploring Random Tree) and A*. By feeding the Octomap into the PlanningScene interface and specifying a goal position, the robot can successfully navigate the scene and complete the task.
     photo1_caption: "Sparse point cloud and camera poses from COLMAP."
     photo1: "assets/img/colmap.png"
     photo2: "assets/img/pipeline.png"
