@@ -19,9 +19,9 @@ url    : "https://yuvansharma.github.io" # the base hostname & protocol for your
 baseurl: "/106a-gaussian-splatting" # the subpath of your site, e.g. /blog
 
 title      : 106A Gaussian Splatting
-email      : your-email@example.com #this is also the email contact forms will go to
-description: "Site description"
-author     : Your Name
+email      : yuvan.sharma@gmail.com #this is also the email contact forms will go to
+description: "Gaussian Splatting for Robotic Manipulation"
+author     : Yuvan Sharma
 # logo:     #optional, defaults to site title
   # path: assets\img\clients\creative-market.jpg
   # height: 60 #height in px, defaults to 52px
