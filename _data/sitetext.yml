@@ -91,21 +91,23 @@ en: &DEFAULT_EN
     text: "The ones who made it happen."
     people:
       - name: "Jialin Zhang"
-        role: "XXXXX"
+        role: "Sophomore studying CS and math, interested in both robotics and software engineering."
         image: assets/img/team/green_face.png
       - name: "Zekai Wang"
-        role: "XXXXX"
+        role: "junior majoring in CS and math, interested in machine learning and robotics."
         image: assets/img/team/yellow_face.png
       - name: "Tony Wan"
-        role: "XXXXX"
+        role: "senior majoring in CS and Applied Math, interested in artificial intelligence and robotics."
         image: assets/img/team/red_face.png
       - name: "Yuvan Sharma"
-        role: "XXXXX"
+        role: "junior majoring in CS and Astrophysics, interested in robotic applications for space exploration."
         image: assets/img/team/blue_face.png
     
   conclusion:
     title: "Conclusion"
     text: "Key takeaways and future improvements."
+    image: assets/img/grasp_image.png
+    caption: "Example of generated grasps for the yellow target object."
     body: |
       
       In conclusion, we were able to use Gaussian splatting for a high quality, albeit static, 3D reconstruction of a tabletop scene and use it for pick and place tasks. Two problems we faced and the solutions we came up with are described below:
@@ -116,7 +118,7 @@ en: &DEFAULT_EN
       - **Problem:** Difficult to recreate scene accurately
         - *Solution:* To solve the issue of a reproducible scene, we used a simple scene boundary made with tape, and took many initial measurements such as relative object distances during scene setup. This allowed us to keep refining our approach over multiple work sessions without having to set up a new scene or train a new splat every time.
 
-      An improvement we would make to a future iteration of this project is adding a grasp planning module that takes into consideration the point cloud of the target object to decide what the best grasping pose would be. This would make the project significantly more robust and allow for working with even more complicated tasks and objects.
+      An improvement we would make to a future iteration of this project is adding a grasp planning module that takes into consideration the point cloud of the target object to decide what the best grasping pose would be. We successfully implemented a version of this, where given the smoothed reconstructed mesh of the object of interest, we sample candidate grasps and use the Ferrari-Canny grasp metric to select the best grasp. With the improved grasp, we are able to specify a 6 DoF pose for the end effector to grasp the object more robustly. However due to time constraints, we were unable to test this module on the Sawyer robot. An example of the generated grasps is shown below.
 
 
   links:
