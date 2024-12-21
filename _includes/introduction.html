@@ -24,10 +24,8 @@
       <!-- Photo Box with Caption -->
       <div class="col-md-6 mx-auto text-center">
         <figure>
-          <img src="{{ site.data.sitetext[site.locale].introduction.photo | default: 'path/to/your/photo.jpg' }}" alt="Project Photo" class="img-fluid rounded">
-          <figcaption class="text-muted">
-            <em>{{ site.data.sitetext[site.locale].introduction.caption | markdownify }}</em>
-          </figcaption>
+          <img src="{{ site.data.sitetext[site.locale].introduction.photo | default: 'path/to/your/photo.jpg' }}" alt="Project Photo" class="img-fluid rounded" style="border: 2px solid black; margin-bottom: 0.5em; width: 100%;">
+          <figcaption class="text-muted" style="font-style: italic;">{{ site.data.sitetext[site.locale].introduction.caption | default: "" }}</figcaption>
                   </figure>
       </div>
     </div>
