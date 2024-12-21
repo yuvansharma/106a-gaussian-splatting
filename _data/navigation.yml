@@ -20,11 +20,11 @@ en: &DEFAULT_EN
     - title: "Results"
       section: results
     - title: "Conclusion"
-      section: team
+      section: conclusion
     - title: "Team"
       section: team
     - title: "Links"
-      section: contact
+      section: links
 en-US:
   <<: *DEFAULT_EN
 en-CA:

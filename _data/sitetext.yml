@@ -21,7 +21,7 @@ en: &DEFAULT_EN
       </div>
     button: Tell Me More!
     buttonlink: "#introduction"
-
+  
   introduction:
     section: "introduction"
     title: "Introduction"
@@ -51,10 +51,6 @@ en: &DEFAULT_EN
       After some extensive experimentation—particularly with the Gaussian splatting part of the pipeline—we were able to reliably create high quality splats for our scenes. We provide interactive visualizations for two of our final scenes and target objects below.
     body2: |
       We were able to perform pick place tasks with both objects with precision, both in terms of the object localization (the reconstruction part) and avoiding obstacles (the motion planning part). Since our project has no live vision component and relies entirely on the scene reconstruction, it was critical that the point cloud obtained from Gaussian splatting was high quality, correctly scaled and oriented and the object localization component was accurate enough. Our integration of the point cloud with Octomap was also smooth as collision avoidance worked as expected. We provide a visualization of the Octomap and a video demo for one of our scenes below.
-      <br>
-      <br>
-      <br>
-      HELLO ADD THE VIDEO
     photo1: "assets/img/octomap_viz.png"
     caption1: "Octomap visualization in MoveIt! during collision planning."
     video1: "assets/videos/demo.mp4"
@@ -78,7 +74,7 @@ en: &DEFAULT_EN
       - **Step 2: COLMAP**: We use COLMAP, a Structure from Motion (SfM) program that takes in input images and outputs a sparse point cloud (~10,000 points) and estimates for camera poses corresponding to the images. While not necessary, we found that this step is a good starting point for the Gaussian splatting training and helps it converge faster. 
     
     body2: |
-      - **Step 3: Gaussian splatting training**: We train the Gaussian splat based on the [original codebase](https://github.com/graphdeco-inria/gaussian-splatting/). For our scenes, we found training converges after 15,000 steps.
+      - **Step 3: Gaussian splatting training**: We train the Gaussian splat based on the [<u>original codebase</u>](https://github.com/graphdeco-inria/gaussian-splatting/). For our scenes, we found training converges after 15,000 steps.
       - **Step 4: Localizing target object:** After cleaning and scaling the output point cloud, we use color filters and clustering to find the centroid (x,y,z) of the target object.
       - **Step 5: Octomap and MoveIt**: We add the point cloud data to MoveIt!'s PlanningScene as an Octomap, a 3D occupancy grid that represents the environment and objects within it. Aligning the Octomap to the robot model's base frame allows the system to understand the spatial layout, including obstacles, and provides a foundation for dynamic motion planning. Using MoveIt!'s Command Group functionality, we perform trajectory planning with integrated collision checking, ensuring that the robot’s movements are both efficient and safe.
       - **Step 6: Collision Planning**: MoveIt! utilizes the Open Motion Planning Library (OMPL) to handle motion planning, offering access to a suite of powerful algorithms such as RRT (Rapidly-exploring Random Tree) and A*. By feeding the Octomap into the PlanningScene interface and specifying a goal position, the robot can successfully navigate the scene and complete the task.
@@ -89,89 +85,47 @@ en: &DEFAULT_EN
     body3: |
       In terms of the code for this project, we used the original Gaussian splatting codebase described above and COLMAP, with minimal changes such as hyperparameters. We wrote the code ourselves for point cloud noise removal, clustering and color filtering for object localization. We also implemented the Octomap integration code with MoveIt! ourselves, which we provide in our Github repository.
   
-  clients:
-    section: clients
-    max-height: 100px
-    horizontal-scrolling: "" #"yes/no"
-    list:
-      - title: "envato"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/envato.jpg
-      - title: "designmodo"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/designmodo.jpg
-      - title: "themeforest"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/themeforest.jpg
-      - title: "Creative Market"
-        url: https://github.com/raviriley/agency-jekyll-theme
-        logo: assets/img/clients/creative-market.jpg
 
   team:
-    title: "OUR AMAZING TEAM"
-    text: "Lorem ipsum dolor sit amet consectetur."
-    subtext: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde. **Markdown** supported.
-    section: team
+    title: "OUR TEAM"
+    text: "The ones who made it happen."
     people:
-      - name: "Kay Garland"
-        role: "Lead Designer"
-        image: assets/img/team/500x500.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
-      - name: "Larry Parker"
-        role: "Lead Marketer"
-        image: assets/img/team/2.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
-      - name: "Diana Perterson"
-        role: "Lead Developer"
-        image: assets/img/team/500x500.jpg
-        social:
-          - url: https://twitter.com
-            icon: fab fa-twitter
-          - url: https://facebook.com
-            icon: fab fa-facebook-f
-          - url: https://linkedin.com
-            icon: fab fa-linkedin-in
+      - name: "Jialin Zhang"
+        role: "XXXXX"
+        image: assets/img/team/green_face.png
+      - name: "Zekai Wang"
+        role: "XXXXX"
+        image: assets/img/team/yellow_face.png
+      - name: "Tony Wan"
+        role: "XXXXX"
+        image: assets/img/team/red_face.png
+      - name: "Yuvan Sharma"
+        role: "XXXXX"
+        image: assets/img/team/blue_face.png
+    
+  conclusion:
+    title: "Conclusion"
+    text: "Key takeaways and future improvements."
+    body: |
+      
+      In conclusion, we were able to use Gaussian splatting for a high quality, albeit static, 3D reconstruction of a tabletop scene and use it for pick and place tasks. Two problems we faced and the solutions we came up with are described below:
 
-  contact:
-    title: "Contact Us"
-    text: "Lorem ipsum or call 123456789"
-    section: contact
-    name: "Name*"
-    name-validation: "Please enter your name."
-    email: "Email*"
-    email-validation: "Please enter your email address."
-    phone: "Phone Number"
-    phone-validation: "Please enter your phone number."
-    message: "Message*"
-    message-validation: "Please enter a message."
-    subject: "Contact Form Submission"
-    submit: "Send Message"
+      - **Problem:** Noisy point cloud from splatting
+        - *Solution:* We slowly refined the image collection and gaussian splatting pipeline to increase the quality of point cloud. We experimented with different cameras and mounts as previously described, and also with different frame extraction schemes before settling on our final version.
+          
+      - **Problem:** Difficult to recreate scene accurately
+        - *Solution:* To solve the issue of a reproducible scene, we used a simple scene boundary made with tape, and took many initial measurements such as relative object distances during scene setup. This allowed us to keep refining our approach over multiple work sessions without having to set up a new scene or train a new splat every time.
 
-  footer:
-    legal: "Privacy Policy"
-    social:
-      - url: https://twitter.com
-        icon: "fab fa-twitter"
-      - url: https://facebook.com
-        icon: "fab fa-facebook-f"
-      - url: https://linkedin.com
-        icon: "fab fa-linkedin-in"
-      - url: https://github.com/raviriley/agency-jekyll-theme
-        icon: "fab fa-github"
-      - url: https://instagram.com
-        icon: "fab fa-instagram"
+      An improvement we would make to a future iteration of this project is adding a grasp planning module that takes into consideration the point cloud of the target object to decide what the best grasping pose would be. This would make the project significantly more robust and allow for working with even more complicated tasks and objects.
+
+
+  links:
+    title: "Links"
+    text: "Check out our code and more!"
+    body: |
+      - [<u>Our codebase</u>](https://github.com/graphdeco-inria/gaussian-splatting/)
+      - [<u>Our website source code</u>](https://github.com/yuvansharma/106a-gaussian-splatting)
+
 en-US:
   <<: *DEFAULT_EN
 en-CA:

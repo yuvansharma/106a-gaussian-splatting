@@ -43,17 +43,3 @@ $contact-image: "{{ site.data.style.contact-image }}";
 @import "layout/contact.scss";
 @import "layout/footer.scss";
 
-
-#introduction .section-subheading {
-  margin-bottom: 10px; /* Reduce space between subheading and body */
-}
-
-#introduction .large.text-muted {
-  max-width: 10000px; /* Restrict text width */
-  margin: 0 auto; /* Center text horizontally */
-}
-
-#introduction img {
-  margin-top: 20px; /* Add some space above the image if needed */
-}
-
