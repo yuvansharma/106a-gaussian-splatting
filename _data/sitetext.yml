@@ -126,7 +126,7 @@ en: &DEFAULT_EN
     text: "Check out our code and more!"
     body: |
       - [<u>Our codebase</u>](https://github.com/Benzhang2004/106a-final-proj)
-      - [<u>Our website source code</u>](https://github.com/yuvansharma/106a-gaussian-splatting)
+      - [<u>Our website source code</u>](https://github.com/yuvansharma/106a-gaussian-splatting) (adapted from the [<u>Agency Jekyll Theme</u>](https://github.com/raviriley/agency-jekyll-theme/))
 
 en-US:
   <<: *DEFAULT_EN
